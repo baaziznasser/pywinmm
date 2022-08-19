@@ -12,6 +12,25 @@ https://github.com/baaziznasser/pywinmm
 from ctypes import windll, c_buffer
 import random as rnd
 
+#defining messages beep
+MB_OK = 0
+MB_ICONHAND = 16
+MB_ICONQUESTION = 32
+MB_ICONEXCLAMATION = 48
+MB_ICONASTERISK = 64
+
+#defining PlaySound flags
+SND_ALIAS = 65536
+SND_APPLICATION = 128
+SND_ASYNC = 1
+SND_FILENAME = 131072
+SND_LOOP = 8
+SND_MEMORY = 4
+SND_NODEFAULT = 2
+SND_NOSTOP = 16
+SND_NOWAIT = 8192
+SND_PURGE = 64
+
 #create a class to control mci
 class _mci:
 	#init the class
@@ -183,3 +202,17 @@ class player(object):
 	def unload(self):
 		self._mci.directsend('close %s' % self._alias)
 
+	#PLAY A WAV FILE, a wav from resource, or a system regestered sound string
+class PlaySound():
+	def __init__(self, string, mode = None, flags = 0):
+		self.winmm = windll.winmm.PlaySound(str(string), mode, flags)
+
+	#PLAY A BEEP THROUGH THE SYSTEM REGESTERED SOUND IDS
+class MessageBeep():
+	def __init__(self, string):
+		self.winmm = windll.User32.MessageBeep(int(string))
+
+	#PLAY A BEEP USE THE FREQUENCY AND THE BEEP TIME
+class Beep():
+	def __init__(self, frequency = 500, time = 1000):
+		self.winmm = windll.Kernel32.Beep(frequency, time)
