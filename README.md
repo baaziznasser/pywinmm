@@ -9,6 +9,10 @@ https://github.com/baaziznasser/pywinmm
 ## install pywinmm
 you can install pywinmm through the pypi by using\
 	pip install pywinmm
+## what's new
+* aded PlaySound function, that can use to play a wav files, play wav from resources, and play regestered wav on system
+* aded MessageBeep function, this function can make a beep using the system regestered wavs
+* added Beep function, this function will generate a beep using the frequency and the time that you want
 ## avalable functions
 here is the list of avalable functions\
 * load (load the file)
@@ -27,7 +31,9 @@ here is the list of avalable functions\
 * status (get the current status)
 * stop (stop the player or the recorder)
 * unload (unload the player or the recorder)
-
+* PlaySound (play a wav from file or resource)
+* MessageBeep (play a beep using system regestered wavs)
+* Beep (play a beep using a frequency and time by MS)
 
 an other functions will be aded soon.
 
