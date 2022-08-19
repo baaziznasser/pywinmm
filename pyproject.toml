@@ -8,10 +8,10 @@ version = "0.1"
 authors = [
   { name="Nacer Baaziz", email="nacerbaaziz@ng-space.com" },
 ]
-keywords = ['windows media', 'play wav', 'play mp3', 'python audio', 'play audio files', 'record audio files', 'pymedia', 'winmm.dll', 'pywinmm']
+keywords = ['pywinmm', 'windows multy media', 'winmm.dll', 'pyaudio', 'mp3']
 description = "a python library that works with win multy media dll"
 readme = "README.md"
-license = { file="LICENSE.txt" }
+license = "LGPL-3.0-or-later"
 requires-python = ">=3.4"
 classifiers = [
     'Development Status :: 5 - Production/Stable', 
