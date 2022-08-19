@@ -135,6 +135,7 @@ class player(object):
 	#stop player or recorder
 	def stop(self):
 		self._mci.directsend('stop %s' % self._alias)
+
 	#get the length of the player or the recorded time
 	def getlength(self):
 		if not (self.recorder):
@@ -153,7 +154,7 @@ class player(object):
 	def setposition(self, pos):
 		pos = int(pos)
 		if pos > self.getlength():
-			pos = getlength()
+			pos = self.getlength()
 		elif pos < 0:
 			pos = 0
 		self._mci.directsend('set %s time format milliseconds' % (self._alias))
