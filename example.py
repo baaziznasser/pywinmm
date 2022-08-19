@@ -1,5 +1,8 @@
 import pywinmm
 import time
+pywinmm.Beep(500, 1000)
+time.sleep(2)
+
 clip = pywinmm.load(r'snd.mp3')
 print(clip.getvolume())
 clip.setvolume(200)
