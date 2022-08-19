@@ -8,7 +8,7 @@ https://github.com/baaziznasser/pywinmm
 
 ## install pywinmm
 you can install pywinmm through the pypi by using\
-	pip install pywinmm\
+	pip install pywinmm
 ## avalable functions
 here is the list of avalable functions\
 * load (load the file)
@@ -47,7 +47,7 @@ an other functions will be aded soon.
 	clip.setposition(2000)\
 	print(clip.getposition())\
 	clip.play()\
-	print(clip.status())\
+	print(clip.status())
 
 
 ## notes:
