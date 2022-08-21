@@ -9,7 +9,7 @@ https://github.com/baaziznasser/pywinmm
 """
 
 #import libraries
-from ctypes import windll, c_buffer
+from ctypes import windll, c_buffer, wintypes
 import random as rnd
 
 #defining messages beep
@@ -36,8 +36,12 @@ class _mci:
 	#init the class
 	def __init__(self):
 		#load the dll
-		self.w32mci = windll.winmm.mciSendStringA
-		self.w32mcierror = windll.winmm.mciGetErrorStringA
+		self.w32_obj = windll.winmm
+		self.w32mci = self.w32_obj.mciSendStringA
+		self.w32mcierror = self.w32_obj.mciGetErrorStringA
+
+	def get_obj(self):
+		return self.w32_obj
 
 	#function to send commands to dll
 	def send(self, command):
@@ -67,9 +71,9 @@ class player(object):
 	def __init__(self, filename = "", rec = False):
 		filename = filename.replace('/', '\\')
 		self.filename = filename
-		self._alias = 'player_%s' % str(rnd.random())
+		self._alias = 'player_%s' % str(rnd.randint(10000, 99999))
 		self._mci = _mci()
-
+		self.obj = self._mci.get_obj
 		#open the snd hendle
 		if not (rec):
 			self.recorder = False
@@ -144,16 +148,19 @@ class player(object):
 	#pause player or recorder
 	def pause(self):
 		self._mci.directsend('pause %s' % self._alias)
+
 	#resume the player or the recorder
 	def resume(self):
 		self._mci.directsend('resume %s' % self._alias)
 	#check if file or recorder is paused
+
 	def ispaused(self):
 		return self._mode() == 'paused'
 
 	#stop player or recorder
 	def stop(self):
-		self._mci.directsend('stop %s' % self._alias)
+		self._mci.directsend('stop %s' % (self._alias))
+		self._mci.directsend('seek %s to start' % (self._alias))
 
 	#get the length of the player or the recorded time
 	def getlength(self):
@@ -200,7 +207,17 @@ class player(object):
 
 	#unload file
 	def unload(self):
-		self._mci.directsend('close %s' % self._alias)
+		try:
+			self._mci.directsend('close %s' % (self._alias))
+		except:
+			pass
+		self.hndl = self.obj._handle
+		self.kernel32 = windll.kernel32
+		self.kernel32.FreeLibrary.argtypes = [wintypes.HMODULE]
+		self.kernel32.FreeLibrary(self.hndl)
+		del self.obj
+		del self._mci
+		return True
 
 	#PLAY A WAV FILE, a wav from resource, or a system regestered sound string
 class PlaySound():
