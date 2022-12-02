@@ -62,7 +62,7 @@ class _mci:
 	def directsend(self, txt):
 		(err, buf) = self.send(txt)
 		if err != 0:
-			print('Error %s for "%s": %s' % (str(err), txt, buf))
+			raise Exception('Error %s for "%s": %s' % (str(err), txt, buf))
 		return (err, buf)
 
 #defining the player class
