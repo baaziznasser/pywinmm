@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name = 'pywinmm', 
   packages = ['pywinmm'], 
-  version = '0.2', 
+  version = '0.3', 
   license=' GPL-3.0', 
   description = 'a python library that works with win multy media dll', 
   author = 'nacer baaziz', 
@@ -26,5 +26,8 @@ setup(
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    "Operating System :: Microsoft :: Windows",
+    'Environment :: Win32 (MS Windows)',
+    'Environment :: Win64 (MS Windows)',
 ],
 )
